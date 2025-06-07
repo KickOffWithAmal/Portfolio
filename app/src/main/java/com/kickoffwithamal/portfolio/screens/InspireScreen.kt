@@ -121,6 +121,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.*
 import com.kickoffwithamal.portfolio.ProfileImage
 import com.kickoffwithamal.portfolio.utils.NotchedCard
+import com.kickoffwithamal.portfolio.utils.StaggeredLazyList
 
 @Preview
 @OptIn(ExperimentalPagerApi::class)
@@ -130,20 +131,14 @@ fun InspireScreen() {
     // Background animation (same as before)
     val infiniteTransition = rememberInfiniteTransition()
     val color1 by infiniteTransition.animateColor(
-        initialValue = Color(0xFF0F9DFF), // Glazing Blue
-        targetValue = Color.Black,
-        animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
+        initialValue = Color.Black, targetValue = Color.Yellow, animationSpec = infiniteRepeatable(
+            animation = tween(3000, easing = LinearEasing), repeatMode = RepeatMode.Reverse
         )
     )
 
     val color2 by infiniteTransition.animateColor(
-        initialValue = Color.Black,
-        targetValue = Color(0xFF0F9DFF), // Glazing Blue
-        animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
+        initialValue = Color.Yellow, targetValue = Color.Black, animationSpec = infiniteRepeatable(
+            animation = tween(3000, easing = LinearEasing), repeatMode = RepeatMode.Reverse
         )
     )
 
@@ -178,56 +173,15 @@ fun InspireScreen() {
                         .size(width = 100.dp, height = 10.dp)
                         .background(Color.Black, shape = RoundedCornerShape(50)) // gap background
                 )
-
-//                // Card starts 125.dp from top (100dp image + 10dp gap + margin)
-//                Card(
-//                    modifier = Modifier
-//                        .padding(top = 135.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
-//                        .fillMaxWidth()
-//                        .height(400.dp),
-//                    shape = RoundedCornerShape(32.dp),
-//                    colors = CardDefaults.cardColors(containerColor = Color.Gray),
-//                    elevation = CardDefaults.cardElevation(4.dp)
-//                ) {
-//                    // Card content goes here
-//                    Column(modifier = Modifier
-//                        .padding(top = 150.dp, start = 40.dp)
-//                    ) {
-//                        Row(
-//                            verticalAlignment = Alignment.CenterVertically,
-//                            modifier = Modifier.padding(vertical = 8.dp)
-//                        ) {
-//                            Text(
-//                                text = "📍 Location",
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Medium
-//                            )
-//                        }
-//                        Row(
-//                            verticalAlignment = Alignment.CenterVertically,
-//                            modifier = Modifier.padding(vertical = 8.dp)
-//                        ) {
-//                            Text(
-//                                text = "💼 Software Engineer",
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Medium
-//                            )
-//                        }
-//                        Row(
-//                            verticalAlignment = Alignment.CenterVertically,
-//                            modifier = Modifier.padding(vertical = 8.dp)
-//                        ) {
-//                            Text(
-//                                text = "📱 Android Developer",
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Medium
-//                            )
-//                        }
-//                    }
-//                }
                 NotchedCard()
                 // Profile Image on top
                 ProfileImage()
+            }
+
+            Box(modifier = Modifier.padding(10.dp)
+                .fillMaxSize()
+            ) {
+                StaggeredLazyList()
             }
         }
 
