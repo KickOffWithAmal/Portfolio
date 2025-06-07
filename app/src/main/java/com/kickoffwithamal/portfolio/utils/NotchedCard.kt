@@ -91,7 +91,7 @@ fun NotchedCard() {
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 Text(
-                    text = "📍 Location",
+                    text = "📍 Kochi",
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium
@@ -102,7 +102,7 @@ fun NotchedCard() {
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 Text(
-                    text = "💼 Software Engineer",
+                    text = "💼 Android Developer",
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium
@@ -113,7 +113,7 @@ fun NotchedCard() {
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 Text(
-                    text = "📱 Android Developer",
+                    text = "👨‍💻 2+ years Experience",
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium
