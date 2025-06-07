@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,15 +30,19 @@ import androidx.compose.ui.unit.sp
 fun ProfileImage() {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         modifier = Modifier
             .size(250.dp)
-            .padding(10.dp) // updated padding
+            .padding(10.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.placeholder),
             contentDescription = "Profile Picture",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize().padding(10.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(32.dp))
+                .background(Color.Transparent)
         )
     }
 

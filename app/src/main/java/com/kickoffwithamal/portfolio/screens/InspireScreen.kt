@@ -120,40 +120,27 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import com.google.accompanist.pager.*
 import com.kickoffwithamal.portfolio.ProfileImage
+import com.kickoffwithamal.portfolio.utils.NotchedCard
 
 @Preview
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun InspireScreen() {
-    val quotes = listOf(
-        "Push yourself, because no one else is going to do it for you.",
-        "Great things never come from comfort zones.",
-        "Dream it. Wish it. Do it.",
-        "Success doesn’t just find you. You have to go out and get it."
-    )
-
-    val achievements = listOf(
-        "Completed Android Jetpack Compose Bootcamp",
-        "Built multiple Android apps with Clean Architecture",
-        "Integrated Hilt for Dependency Injection",
-        "Published 3 apps on Google Play Store"
-    )
-
-    val pagerState = rememberPagerState()
 
     // Background animation (same as before)
     val infiniteTransition = rememberInfiniteTransition()
     val color1 by infiniteTransition.animateColor(
-        initialValue = Color(0xFF8E2DE2),
-        targetValue = Color(0xFF4A00E0),
+        initialValue = Color(0xFF0F9DFF), // Glazing Blue
+        targetValue = Color.Black,
         animationSpec = infiniteRepeatable(
             animation = tween(3000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         )
     )
+
     val color2 by infiniteTransition.animateColor(
-        initialValue = Color(0xFF4A00E0),
-        targetValue = Color(0xFF8E2DE2),
+        initialValue = Color.Black,
+        targetValue = Color(0xFF0F9DFF), // Glazing Blue
         animationSpec = infiniteRepeatable(
             animation = tween(3000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
@@ -169,7 +156,8 @@ fun InspireScreen() {
                     start = Offset.Zero,
                     end = Offset.Infinite
                 )
-            ),
+            )
+            .padding(top = 20.dp),
         contentAlignment = Alignment.Center
     ) {
 
@@ -191,53 +179,53 @@ fun InspireScreen() {
                         .background(Color.Black, shape = RoundedCornerShape(50)) // gap background
                 )
 
-                // Card starts 125.dp from top (100dp image + 10dp gap + margin)
-                Card(
-                    modifier = Modifier
-                        .padding(top = 135.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
-                        .fillMaxWidth()
-                        .height(400.dp),
-                    shape = RoundedCornerShape(32.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.Gray),
-                    elevation = CardDefaults.cardElevation(4.dp)
-                ) {
-                    // Card content goes here
-                    Column(modifier = Modifier
-                        .padding(top = 150.dp, start = 40.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        ) {
-                            Text(
-                                text = "📍 Location",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        ) {
-                            Text(
-                                text = "💼 Software Engineer",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        ) {
-                            Text(
-                                text = "📱 Android Developer",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
-                    }
-                }
-
+//                // Card starts 125.dp from top (100dp image + 10dp gap + margin)
+//                Card(
+//                    modifier = Modifier
+//                        .padding(top = 135.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
+//                        .fillMaxWidth()
+//                        .height(400.dp),
+//                    shape = RoundedCornerShape(32.dp),
+//                    colors = CardDefaults.cardColors(containerColor = Color.Gray),
+//                    elevation = CardDefaults.cardElevation(4.dp)
+//                ) {
+//                    // Card content goes here
+//                    Column(modifier = Modifier
+//                        .padding(top = 150.dp, start = 40.dp)
+//                    ) {
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            modifier = Modifier.padding(vertical = 8.dp)
+//                        ) {
+//                            Text(
+//                                text = "📍 Location",
+//                                fontSize = 16.sp,
+//                                fontWeight = FontWeight.Medium
+//                            )
+//                        }
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            modifier = Modifier.padding(vertical = 8.dp)
+//                        ) {
+//                            Text(
+//                                text = "💼 Software Engineer",
+//                                fontSize = 16.sp,
+//                                fontWeight = FontWeight.Medium
+//                            )
+//                        }
+//                        Row(
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            modifier = Modifier.padding(vertical = 8.dp)
+//                        ) {
+//                            Text(
+//                                text = "📱 Android Developer",
+//                                fontSize = 16.sp,
+//                                fontWeight = FontWeight.Medium
+//                            )
+//                        }
+//                    }
+//                }
+                NotchedCard()
                 // Profile Image on top
                 ProfileImage()
             }
