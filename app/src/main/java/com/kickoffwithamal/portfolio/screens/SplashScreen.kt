@@ -35,50 +35,11 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.navigation.NavController
+
 
 @Composable
-fun SplashScreen(
-    composition: LottieComposition?,
-    progress: Float
-) {
-    // Background animation (same as before)
-    val infiniteTransition = rememberInfiniteTransition()
-    val color1 by infiniteTransition.animateColor(
-        initialValue = Color(0xFF000000), targetValue = Color(0xFF222222), animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing), repeatMode = RepeatMode.Reverse
-        )
-    )
-
-    val color2 by infiniteTransition.animateColor(
-        initialValue = Color(0xFF222222), targetValue = Color(0xFF000000), animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing), repeatMode = RepeatMode.Reverse
-        )
-    )
-
-    Column(
-        modifier = Modifier.fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                colors = listOf(color1, color2),
-                start = Offset.Zero,
-                end = Offset.Infinite
-            )),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        if (composition != null) {
-            LottieAnimation(
-                composition = composition,
-                progress = progress,
-                modifier = Modifier.size(300.dp)  // Add size or it might be zero size
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun AppEntry() {
+fun SplashScreen(navController: NavController) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.coder_splash))
     val animationState = animateLottieCompositionAsState(
         composition = composition,
@@ -86,28 +47,75 @@ fun AppEntry() {
         isPlaying = composition != null
     )
 
-    var showSplash by remember { mutableStateOf(true) }
+    // Your glowing black background animation
+    val infiniteTransition = rememberInfiniteTransition()
+    val color1 by infiniteTransition.animateColor(
+        initialValue = Color(0xFF000000), targetValue = Color(0xFF222222),
+        animationSpec = infiniteRepeatable(tween(3000), RepeatMode.Reverse)
+    )
+    val color2 by infiniteTransition.animateColor(
+        initialValue = Color(0xFF222222), targetValue = Color(0xFF000000),
+        animationSpec = infiniteRepeatable(tween(3000), RepeatMode.Reverse)
+    )
 
     LaunchedEffect(composition, animationState.isAtEnd, animationState.isPlaying) {
         if (composition != null && animationState.isAtEnd && !animationState.isPlaying) {
-            showSplash = false
+            navController.navigate("inspire") {
+                popUpTo("splash") { inclusive = true } // removes splash from backstack
+            }
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        AnimatedVisibility(
-            visible = showSplash,
-            exit = fadeOut(animationSpec = tween(500)) + slideOutVertically(),
-            enter = fadeIn(animationSpec = tween(500)) + slideInVertically()
-        ) {
-            SplashScreen(composition = composition, progress = animationState.progress)
-        }
-        AnimatedVisibility(
-            visible = !showSplash,
-            enter = fadeIn(animationSpec = tween(500)) + slideInVertically(initialOffsetY = { it }),
-            exit = fadeOut(animationSpec = tween(500))
-        ) {
-            InspireScreen()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Brush.linearGradient(listOf(color1, color2)))
+    ) {
+        if (composition != null) {
+            LottieAnimation(
+                composition = composition,
+                progress = animationState.progress,
+                modifier = Modifier
+                    .size(300.dp)
+                    .align(Alignment.Center)
+            )
         }
     }
 }
+
+
+//@Preview
+//@Composable
+//fun AppEntry() {
+//    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.coder_splash))
+//    val animationState = animateLottieCompositionAsState(
+//        composition = composition,
+//        iterations = 1,
+//        isPlaying = composition != null
+//    )
+//
+//    var showSplash by remember { mutableStateOf(true) }
+//
+//    LaunchedEffect(composition, animationState.isAtEnd, animationState.isPlaying) {
+//        if (composition != null && animationState.isAtEnd && !animationState.isPlaying) {
+//            showSplash = false
+//        }
+//    }
+//
+//    Box(modifier = Modifier.fillMaxSize()) {
+//        AnimatedVisibility(
+//            visible = showSplash,
+//            exit = fadeOut(animationSpec = tween(500)) + slideOutVertically(),
+//            enter = fadeIn(animationSpec = tween(500)) + slideInVertically()
+//        ) {
+//            SplashScreen(composition = composition, progress = animationState.progress)
+//        }
+//        AnimatedVisibility(
+//            visible = !showSplash,
+//            enter = fadeIn(animationSpec = tween(500)) + slideInVertically(initialOffsetY = { it }),
+//            exit = fadeOut(animationSpec = tween(500))
+//        ) {
+//            InspireScreen()
+//        }
+//    }
+//}

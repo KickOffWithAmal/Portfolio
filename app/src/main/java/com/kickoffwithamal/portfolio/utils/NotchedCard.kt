@@ -77,10 +77,6 @@ fun NotchedCard() {
             Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
                 Text(text = "Amal Ramachandran", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
-
-            Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally).padding(top = 5.dp)) {
-                Text(text = "@amal", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Normal)
-            }
         }
         // Card content goes here
         Column(
