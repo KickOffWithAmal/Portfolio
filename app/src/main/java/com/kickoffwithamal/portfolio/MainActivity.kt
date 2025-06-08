@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.kickoffwithamal.portfolio.screens.AppEntry
 import com.kickoffwithamal.portfolio.screens.InspireScreen
 import com.kickoffwithamal.portfolio.ui.theme.PortfolioTheme
 
@@ -20,24 +21,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PortfolioTheme {
-                InspireScreen()
+                AppEntry()
+//                InspireScreen()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PortfolioTheme {
-        Greeting("Android")
     }
 }
